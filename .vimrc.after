@@ -1,0 +1,122 @@
+" Set default color scheme if not gui
+if has('gui_running')
+  "color zenburn
+  color solarized
+  set background=light
+else
+   let g:solarized_termcolors=256
+  colorscheme solarized
+  "color zenburn
+  " color default
+endif
+
+" COLOR STUFF!!
+"color solarized
+"color wombat
+"let g:solarized_contrast = "high"
+"set background=dark
+"set background=light
+"color AutumnLeaf
+set t_Co=256
+
+"Window changing remap
+:nnoremap ,, <C-w>w
+:nnoremap ,h <C-w>h
+:nnoremap ,j <C-w>j
+:nnoremap ,k <C-w>k
+:nnoremap ,l <C-w>l
+:nnoremap ,o <C-w>o
+:nnoremap ,q <C-w>q
+
+
+" Autocmd stuff
+
+autocmd bufnewfile *.m so /home/jnm022/Documents/doktorgrad/faglig/kode/templates/matlab_template.txt
+autocmd bufnewfile *.m exe "1," . 10 . "g/File Name :.*/s//File Name : " .expand("%")
+autocmd bufnewfile *.m exe "1," . 10 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
+autocmd Bufwritepre,filewritepre *.m execute "normal ma"
+
+autocmd Bufwritepre,filewritepre *.m exe "1," . 10 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
+autocmd bufwritepost,filewritepost *.m execute "normal `a"
+
+autocmd BufNewFile,BufRead *.tex :set textwidth=72 
+autocmd BufNewFile,BufRead *.tex :set fo=cqt
+autocmd BufNewFile,BufRead *.tex :set wm=0
+
+function RunLatexBibtex()
+  !pdflatex %
+  !bibtex %:r.aux
+  !pdflatex %
+  !pdflatex % 
+endfunction
+
+autocmd BufRead *.tex :TTarget pdf
+
+" Fixing highlighting when searching
+nnoremap <silent> n   n:call HLNext(0.4)<cr>
+nnoremap <silent> N   N:call HLNext(0.4)<cr>
+
+"function! HLNext (blinktime)
+    "let [bufnum, lnum, col, off] = getpos('.')
+    "let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+    "let target_pat = '\c\%#'.@/
+    "let ring = matchadd('WhiteOnRed', target_pat, 101)
+    "redraw
+    "exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+    "call matchdelete(ring)
+    "redraw
+"endfunction
+function! HLNext (blinktime)
+    set invcursorline
+    redraw
+    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+    set invcursorline
+    redraw
+endfunction
+
+let g:vim_typing_sound_path = '406__TicTacShutUp__click_1_d.wav*'
+let g:Tex_ViewRule_pdf = 'okular'
+
+"saving folds 
+"autocmd BufWinLeave *.* mkview
+"autocmd BufWinEnter *.* silent loadview 
+"au BufWinLeave ?* mkview
+"au BufWinEnter ?* silent loadview
+"au BufWritePost,BufLeave,WinLeave ?* mkview
+"au BufWinEnter ?* silent loadview
+
+" R vim stuff
+let vimrplugin_vsplit=1
+
+" Vim matlab stuff
+let g:matlab_behave_window_name="MATLAB R2014b"
+
+" Syntastic
+let g_syntastic_matlab_checkers = ['mlint']
+
+
+" Folding stuff copy pasted from vim-matlab-behave
+" --------------------------------------------------------------------------------
+" --- Folding
+" --------------------------------------------------------------------------------
+function! MatlabFolds()
+    let thisline = getline(v:lnum)
+    if match(thisline,'^[\ ]*%%') >=0
+        return ">1"
+    else
+        return "="
+    endif
+endfunction
+
+setlocal foldmethod=expr
+setlocal foldexpr=MatlabFolds()
+
+" Screen stuff
+let g:ScreenImpl = 'Tmux'
+
+" highlight
+set cursorline
+set cursorcolumn
+
+let g:ScreenShellTmuxInitArgs = '-2'
+

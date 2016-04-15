@@ -1,0 +1,4 @@
+call janus#disable_plugin('vim-matlab-behave')
+
+" Testing a different <leader> key
+let mapleader = "\<Space>"
