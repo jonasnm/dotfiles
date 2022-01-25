@@ -17,11 +17,12 @@ Plugin 'VundleVim/Vundle.vim'
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-unimpaired'
-Plugin 'file:///home/jonas/.vim/bundle/nerdcommenter'
-Plugin 'file:///home/jonas/.vim/bundle/nerdtree'
-Plugin 'file:///home/jonas/.vim/bundle/python-mode'
-Plugin 'file:///home/jonas/.vim/bundle/python.vim'
-Plugin 'file:///home/jonas/.vim/bundle/pythoncomplete'
+Plugin 'preservim/nerdcommenter'
+Plugin 'preservim/nerdtree'
+Plugin 'godlygeek/tabular'
+Plugin 'preservim/vim-markdown'
+Plugin 'ghifarit53/tokyonight-vim'
+Plugin 'itchyny/lightline.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -38,5 +39,15 @@ let mapleader = "\<Space>"
 :nnoremap ,o <C-w>o
 :nnoremap ,q <C-w>q
 
-
 nnoremap <leader>n :NERDTreeFocus<CR>
+
+" color schemes
+"set termguicolors
+
+let g:tokyonight_style = 'night' " available: night, storm
+let g:tokyonight_enable_italic = 1
+
+colorscheme tokyonight
+
+" Light line
+set laststatus=2
