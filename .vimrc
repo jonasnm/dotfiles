@@ -23,6 +23,7 @@ Plugin 'godlygeek/tabular'
 Plugin 'preservim/vim-markdown'
 Plugin 'ghifarit53/tokyonight-vim'
 Plugin 'itchyny/lightline.vim'
+Plugin 'Vimjas/vim-python-pep8-indent'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -51,3 +52,8 @@ colorscheme tokyonight
 
 " Light line
 set laststatus=2
+
+" Tab completion hack
+set wildmode=longest,list,full
+set wildmenu
+
