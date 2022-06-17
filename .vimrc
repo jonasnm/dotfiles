@@ -23,6 +23,7 @@ Plugin 'godlygeek/tabular'
 Plugin 'preservim/vim-markdown'
 Plugin 'ghifarit53/tokyonight-vim'
 Plugin 'itchyny/lightline.vim'
+Plugin 'junegunn/goyo.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -42,7 +43,7 @@ let mapleader = "\<Space>"
 nnoremap <leader>n :NERDTreeFocus<CR>
 
 " color schemes
-"set termguicolors
+set termguicolors
 
 let g:tokyonight_style = 'night' " available: night, storm
 let g:tokyonight_enable_italic = 1
