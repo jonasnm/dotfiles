@@ -22,7 +22,6 @@ Plugin 'preservim/nerdtree'
 Plugin 'godlygeek/tabular'
 Plugin 'preservim/vim-markdown'
 Plugin 'ghifarit53/tokyonight-vim'
-Plugin 'itchyny/lightline.vim'
 Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'junegunn/goyo.vim'
 
@@ -43,6 +42,10 @@ let mapleader = "\<Space>"
 
 nnoremap <leader>n :NERDTreeFocus<CR>
 
+:nnoremap <F5> "=strftime("%c")<CR>P
+:inoremap <F5> <C-R>=strftime("%c")<CR>
+
+
 " color schemes
 set termguicolors
 
@@ -57,4 +60,9 @@ set laststatus=2
 " Tab completion hack
 set wildmode=longest,list,full
 set wildmenu
+
+
+function Pandoc()
+		!pandoc % -s -t html5 -o %:r.html 
+endfunction
 
