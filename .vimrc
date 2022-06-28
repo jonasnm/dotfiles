@@ -24,6 +24,8 @@ Plugin 'preservim/vim-markdown'
 Plugin 'ghifarit53/tokyonight-vim'
 Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'junegunn/goyo.vim'
+Plugin 'jssteinberg/hackline.vim'
+Plugin 'vim-scripts/AutoComplPop'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -62,7 +64,10 @@ set wildmode=longest,list,full
 set wildmenu
 
 
+" Pandoc for reports
 function Pandoc()
 		!pandoc % -s -t html5 -o %:r.html 
 endfunction
 
+" Goyo stuff
+let g:goyo_width=150
