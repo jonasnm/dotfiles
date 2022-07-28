@@ -65,8 +65,13 @@ set wildmenu
 
 
 " Pandoc for reports
-function Pandoc()
-		!pandoc % -s -t html5 -o %:r.html 
+function MarkdownToHtml(...)
+		"exe('!pandoc % -f gfm --metadata=title:' . a:0 . '-s -t html5 -o %:r.html')
+		exe('!pandoc % -s -t html5 -o %:r.html')
+endfunction
+
+function MarkdownToPdf()
+		exe('!pandoc % -o %:r.pdf')
 endfunction
 
 " Goyo stuff
