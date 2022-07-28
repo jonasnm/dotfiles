@@ -71,3 +71,6 @@ endfunction
 
 " Goyo stuff
 let g:goyo_width=150
+
+syntax on
+set mouse=a
