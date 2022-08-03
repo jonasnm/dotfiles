@@ -42,11 +42,13 @@ let mapleader = "\<Space>"
 :nnoremap ,o <C-w>o
 :nnoremap ,q <C-w>q
 
-nnoremap <leader>n :NERDTreeFocus<CR>
+:nnoremap <leader>n :NERDTreeFocus<CR>
 
 :nnoremap <F5> "=strftime("%c")<CR>P
 :inoremap <F5> <C-R>=strftime("%c")<CR>
 
+" Mouse mode
+set mouse=a
 
 " color schemes
 set termguicolors
@@ -76,3 +78,52 @@ endfunction
 
 " Goyo stuff
 let g:goyo_width=150
+
+" Automatically add shebang, taken from https://github.com/LinuxSDA/HashBang/blob/master/Hashbang
+ function! Hashbang(portable, permission, RemExt)
+let shells = {
+        "\    'awk': "awk",
+        \     'sh': "bash",
+        "\     'hs': "runhaskell",
+        "\     'jl': "julia",
+        "\    'lua': "lua",
+        "\    'mak': "make",
+        "\     'js': "node",
+        "\      'm': "octave",
+        "\     'pl': "perl",
+        "\    'php': "php",
+        "\     'py': "python",
+        "\      'r': "Rscript",
+        "\     'rb': "ruby",
+        "\  'scala': "scala",
+        "\    'tcl': "tclsh",
+        "\     'tk': "wish"
+        \    }
+
+let extension = expand("%:e")
+
+if has_key(shells,extension)
+	let fileshell = shells[extension]
+
+	if a:portable
+		let line =  "#! /usr/bin/env " . fileshell
+	else
+		let line = "#! " . system("which " . fileshell)
+	endif
+
+	0put = line
+
+	if a:permission
+		:autocmd BufWritePost * :autocmd VimLeave * :!chmod u+x %
+	endif
+
+
+	if a:RemExt
+		:autocmd BufWritePost * :autocmd VimLeave * :!mv % "%:p:r"
+	endif
+
+endif
+
+endfunction
+
+:autocmd BufNewFile *.* :call Hashbang(1,1,0)
